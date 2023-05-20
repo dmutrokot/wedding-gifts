@@ -2,36 +2,39 @@
   <p class="allProducts-title">All Products</p>
 
   <ng-container *ngIf="!areProductsLoading; else loading">
-    <ng-container *ngIf="allProducts.length !== 0; else noData">
-      <div class="allProducts-list-header">
-        <div class="name">Name</div>
-        <div class="brand">Brand</div>
-        <div class="price">Price</div>
-        <div class="quantity">In Stock</div>
-        <div></div>
-      </div>
+    <ng-container *ngIf="allProducts$ | async as allProducts">
+      <ng-container *ngIf="allProducts.length !== 0; else noData">
+        <div class="allProducts-list-header">
+          <div class="name">Name</div>
+          <div class="brand">Brand</div>
+          <div class="price">Price</div>
+          <div class="quantity">In Stock</div>
+          <div></div>
+        </div>
 
-      <ul class="allProducts-list">
-        <li
-          *ngFor="let product of allProducts"
-          class="allProducts-list-item"
-          [ngClass]="{ 'outOfStoke': product.in_stock_quantity === 0 }"
-        >
-          <div class="name" title="{{ product.name }}">{{ product.name }}</div>
-          <div class="brand">{{ product.brand }}</div>
-          <div class="price">{{ product.price }}</div>
-          <div class="quantity">{{ product.in_stock_quantity }}</div>
-          <div>
-            <button
-              class="action-button"
-              [disabled]="product.in_stock_quantity === 0"
-              [ngClass]="{ 'disabled': product.in_stock_quantity === 0 }"
-            >
-              Add
-            </button>
-          </div>
-        </li>
-      </ul>
+        <ul class="allProducts-list">
+          <li
+            *ngFor="let product of allProducts"
+            class="allProducts-list-item"
+            [ngClass]="{ 'outOfStoke': product.in_stock_quantity === 0 }"
+          >
+            <div class="name" title="{{ product.name }}">{{ product.name }}</div>
+            <div class="brand">{{ product.brand }}</div>
+            <div class="price">{{ product.price }}</div>
+            <div class="quantity">{{ product.in_stock_quantity }}</div>
+            <div>
+              <button
+                class="action-button"
+                [disabled]="product.in_stock_quantity === 0"
+                [ngClass]="{ 'disabled': product.in_stock_quantity === 0 }"
+                (click)="onAddProductToSelectedList(product)"
+              >
+                Add
+              </button>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subject, finalize, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models';
@@ -11,7 +11,7 @@ import { Product } from '../../models';
   styleUrls: ['./all-products.component.scss'],
 })
 export class AllProductsComponent implements OnInit, OnDestroy {
-  public allProducts: Product[] = [];
+  public allProducts$: BehaviorSubject<Product[]>;
   public areProductsLoading: boolean = false;
 
   private destroy$: Subject<void> = new Subject<void>();
@@ -19,17 +19,17 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
+    this.allProducts$ = this.productsService.allProducts$;
     this.areProductsLoading = true;
 
-    this.productsService
-      .getProducts()
-      .pipe(
-        finalize(() => (this.areProductsLoading = false)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((products) => {
-        this.allProducts = products;
-      });
+    setTimeout(() => {
+      this.productsService.getProducts();
+      this.areProductsLoading = false;
+    }, 1000);
+  }
+
+  public onAddProductToSelectedList(product: Product): void {
+    this.productsService.addProductToList(product);
   }
 
   ngOnDestroy(): void {
