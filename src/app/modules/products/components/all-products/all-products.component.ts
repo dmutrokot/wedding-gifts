@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models';
@@ -11,19 +11,24 @@ import { Product } from '../../models';
   styleUrls: ['./all-products.component.scss'],
 })
 export class AllProductsComponent implements OnInit, OnDestroy {
-  allProducts: Product[] = [];
+  public allProducts: Product[] = [];
+  public areProductsLoading: boolean = false;
 
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
+    this.areProductsLoading = true;
+
     this.productsService
       .getProducts()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        finalize(() => (this.areProductsLoading = false)),
+        takeUntil(this.destroy$)
+      )
       .subscribe((products) => {
         this.allProducts = products;
-        console.log(this.allProducts);
       });
   }
 
