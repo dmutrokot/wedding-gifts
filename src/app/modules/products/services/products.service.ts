@@ -8,6 +8,6 @@ import { Observable, delay, of } from 'rxjs';
 @Injectable()
 export class ProductsService {
   public getProducts(): Observable<Product[]> {
-    return of(products).pipe(delay(1000));
+    return of(Array.from(products)).pipe(delay(1000));
   }
 }
