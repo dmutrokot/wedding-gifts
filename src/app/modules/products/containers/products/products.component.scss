@@ -5,3 +5,33 @@
   display: flex;
   padding: 0 12px;
 }
+
+.products-wrapper {
+  width: 50%;
+
+  &-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #3498db;
+
+    & button {
+      background-color: #3498db;
+      color: white;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      padding: 10px 20px;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #2980b9;
+      }
+
+      &.active {
+        background-color: #2980b9;
+        font-weight: bold;
+      }
+    }
+  }
+}

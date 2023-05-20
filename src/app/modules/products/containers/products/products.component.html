@@ -1,4 +1,30 @@
 <div class="products-container">
-  <app-all-products></app-all-products>
+  <div class="products-wrapper" [ngSwitch]="activeView">
+    <div class="products-wrapper-nav">
+      <button
+        [ngClass]="{ 'active': isActive(ProductListType.All) }"
+        (click)="onSetActiveView(ProductListType.All)"
+      >
+        All Products
+      </button>
+      <button
+        [ngClass]="{ 'active': isActive(ProductListType.Purchased) }"
+        (click)="onSetActiveView(ProductListType.Purchased)"
+      >
+        Purchased Products
+      </button>
+      <button
+        [ngClass]="{ 'active': isActive(ProductListType.Unpurchased) }"
+        (click)="onSetActiveView(ProductListType.Unpurchased)"
+      >
+        Unpurchased Products
+      </button>
+    </div>
+
+    <app-all-products *ngSwitchCase="ProductListType.All"></app-all-products>
+    <app-purchased-products *ngSwitchCase="ProductListType.Purchased"></app-purchased-products>
+    <app-unpurchased-products *ngSwitchCase="ProductListType.Unpurchased"></app-unpurchased-products>
+  </div>
+
   <app-selected-products></app-selected-products>
 </div>
