@@ -3,14 +3,13 @@
 }
 
 .nav-list {
+  display: flex;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 
   &-item {
-    float: left;
-
     a {
       display: block;
       color: white;
