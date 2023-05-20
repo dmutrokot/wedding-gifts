@@ -1,19 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AppComponent } from './app.component';
-import { NavComponent } from './common/nav/nav.component';
+import { NavComponent } from './nav.component';
 
-describe('AppComponent', () => {
+describe('NavComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [AppComponent, NavComponent],
+      declarations: [NavComponent],
     })
   );
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should create', () => {
+    const fixture = TestBed.createComponent(NavComponent);
     const app = fixture.componentInstance;
 
     expect(app).toBeTruthy();
