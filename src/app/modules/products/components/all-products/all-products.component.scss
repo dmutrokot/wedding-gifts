@@ -25,11 +25,9 @@
       & > div {
         flex: 1;
         text-align: center;
-      }
-
-      &.outOfStoke {
-        opacity: 0.2;
-        pointer-events: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 
@@ -40,6 +38,10 @@
 
     &-item {
       border-bottom: 1px solid #eee;
+
+      &.outOfStoke {
+        opacity: 0.2;
+      }
     }
   }
 }

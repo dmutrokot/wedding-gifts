@@ -16,7 +16,7 @@
           class="allProducts-list-item"
           [ngClass]="{ 'outOfStoke': product.in_stock_quantity === 0 }"
         >
-          <div class="name">{{ product.name }}</div>
+          <div class="name" title="{{ product.name }}">{{ product.name }}</div>
           <div class="brand">{{ product.brand }}</div>
           <div class="price">{{ product.price }}</div>
           <div class="quantity">{{ product.in_stock_quantity }}</div>

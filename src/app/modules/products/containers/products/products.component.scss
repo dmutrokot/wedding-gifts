@@ -3,4 +3,5 @@
 .products-container {
   height: calc(100% - $nav-height);
   display: flex;
+  padding: 0 12px;
 }
