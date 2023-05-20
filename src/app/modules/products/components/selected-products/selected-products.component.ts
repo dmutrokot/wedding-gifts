@@ -10,11 +10,11 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./selected-products.component.scss'],
 })
 export class SelectedProductsComponent implements OnInit {
-  public selectedProducts: BehaviorSubject<SelectedProduct[]>;
+  public selectedProducts$: BehaviorSubject<SelectedProduct[]>;
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.selectedProducts = this.productsService.selectedProducts$;
+    this.selectedProducts$ = this.productsService.selectedProducts$;
   }
 }

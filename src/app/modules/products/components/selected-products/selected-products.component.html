@@ -1,1 +1,40 @@
-<div>app-selected-products works!</div>
+<div class="selectedProducts-container">
+  <p class="selectedProducts-title">Selected Products</p>
+
+  <ng-container *ngIf="selectedProducts$ | async as selectedProducts">
+    <ng-container *ngIf="selectedProducts.length !== 0; else noData">
+      <div class="selectedProducts-list-header">
+        <div class="name">Name</div>
+        <div class="brand">Brand</div>
+        <div class="price">Price</div>
+        <div class="quantity">Quantity</div>
+        <div></div>
+      </div>
+
+      <ul class="selectedProducts-list">
+        <li
+          *ngFor="let product of selectedProducts"
+          class="selectedProducts-list-item"
+        >
+          <div class="name" title="{{ product.name }}">{{ product.name }}</div>
+          <div class="brand">{{ product.brand }}</div>
+          <div class="price">{{ product.price }}</div>
+          <div class="quantity">{{ product.quantity }}</div>
+          <div>
+            <button
+              class="action-button"
+            >
+              Remove
+            </button>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noData>
+  <div class="noData-container">
+    There are no selected products
+  </div>
+</ng-template>
