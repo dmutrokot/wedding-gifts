@@ -1,1 +1,19 @@
-<div>app-all-products works!</div>
+<div class="allProducts-container">
+  <p class="allProducts-title">All Products</p>
+
+  <div class="allProducts-list-header">
+    <div class="name">Name</div>
+    <div class="brand">Brand</div>
+    <div class="price">Price</div>
+    <div class="quantity">In Stock</div>
+  </div>
+
+  <ul class="allProducts-list">
+    <li *ngFor="let product of allProducts" class="allProducts-list-item">
+      <div class="name">{{ product.name }}</div>
+      <div class="brand">{{ product.brand }}</div>
+      <div class="price">{{ product.price }}</div>
+      <div class="quantity">{{ product.in_stock_quantity }}</div>
+    </li>
+  </ul>
+</div>

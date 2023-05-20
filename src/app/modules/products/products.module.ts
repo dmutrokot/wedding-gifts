@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 
@@ -13,7 +14,7 @@ import { SelectedProductsComponent } from './components/selected-products/select
     AllProductsComponent,
     SelectedProductsComponent,
   ],
-  imports: [ProductsRoutingModule],
+  imports: [CommonModule, ProductsRoutingModule],
   providers: [ProductsService],
 })
 export class ProductsModule {}

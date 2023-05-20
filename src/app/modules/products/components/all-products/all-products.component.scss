@@ -1,0 +1,38 @@
+:host {
+  width: 50%;
+}
+
+.allProducts {
+  &-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &-list {
+    padding: 0;
+
+    &-header,
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+
+      & > div {
+        flex: 1;
+        text-align: center;
+      }
+    }
+
+    &-header {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+
+    &-item {
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+
+
