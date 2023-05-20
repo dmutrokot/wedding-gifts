@@ -1,4 +1,7 @@
+@import '../../../assets/styles/variables.scss';
+
 .nav-container {
+  height: $nav-height;
   background-color: #333;
 }
 
