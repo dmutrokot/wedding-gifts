@@ -5,12 +5,17 @@ import { ProductsComponent } from './products.component';
 import { AllProductsComponent } from '../../components/all-products/all-products.component';
 
 import { ProductsService } from '../../services/products.service';
+import { SelectedProductsComponent } from '../../components/selected-products/selected-products.component';
 
 describe('ProductsComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [ProductsComponent, AllProductsComponent],
+      declarations: [
+        ProductsComponent,
+        AllProductsComponent,
+        SelectedProductsComponent,
+      ],
       providers: [ProductsService],
     })
   );
