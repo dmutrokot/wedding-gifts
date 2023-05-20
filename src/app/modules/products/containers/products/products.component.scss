@@ -1,0 +1,7 @@
+@import '../../../../../assets/styles/variables.scss';
+
+.products-container {
+  height: calc(100% - $nav-height);
+  display: flex;
+  justify-content: space-evenly;
+}
