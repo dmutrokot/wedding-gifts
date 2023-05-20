@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models';
 
 import * as products from '../../../../data/products.json';
+import { Observable, delay, of } from 'rxjs';
 
 @Injectable()
 export class ProductsService {
-  public getProducts(): Product[] {
-    return products;
+  public getProducts(): Observable<Product[]> {
+    return of(products).pipe(delay(1000));
   }
 }
