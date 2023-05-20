@@ -21,7 +21,15 @@
           <div class="brand">{{ product.brand }}</div>
           <div class="price">{{ product.price }}</div>
           <div class="quantity">{{ product.in_stock_quantity }}</div>
-          <div><button>Add</button></div>
+          <div>
+            <button
+              class="action-button"
+              [disabled]="product.in_stock_quantity === 0"
+              [ngClass]="{ 'disabled': product.in_stock_quantity === 0 }"
+            >
+              Add
+            </button>
+          </div>
         </li>
       </ul>
     </ng-container>
