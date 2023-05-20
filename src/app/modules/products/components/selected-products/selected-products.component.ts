@@ -17,4 +17,8 @@ export class SelectedProductsComponent implements OnInit {
   ngOnInit(): void {
     this.selectedProducts$ = this.productsService.selectedProducts$;
   }
+
+  public onRemoveProductFromList(id: number): void {
+    this.productsService.removeProductFromList(id);
+  }
 }

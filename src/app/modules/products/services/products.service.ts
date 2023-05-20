@@ -41,4 +41,22 @@ export class ProductsService {
       this.selectedProducts$.next(currentSelectedProducts);
     }
   }
+
+  public removeProductFromList(id: number): void {
+    const currentAllProducts: Product[] = this.allProducts$.value;
+    const currentProductIndex: number = currentAllProducts.findIndex((currentProduct) => currentProduct.id === id);
+    currentAllProducts[currentProductIndex].in_stock_quantity += 1;
+    this.allProducts$.next(currentAllProducts);
+
+    const currentSelectedProducts: SelectedProduct[] = this.selectedProducts$.value;
+    const alreadyAddedProductIndex: number = currentSelectedProducts.findIndex((currentProduct) => currentProduct.id === id);
+
+    if (currentSelectedProducts[alreadyAddedProductIndex].quantity === 1) {
+      currentSelectedProducts.splice(alreadyAddedProductIndex, 1);
+    } else {
+      currentSelectedProducts[alreadyAddedProductIndex].quantity -= 1;
+    }
+
+    this.selectedProducts$.next(currentSelectedProducts);
+  }
 }
