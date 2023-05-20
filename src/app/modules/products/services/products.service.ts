@@ -59,4 +59,10 @@ export class ProductsService {
 
     this.selectedProducts$.next(currentSelectedProducts);
   }
+
+  public purchaseProducts(products: SelectedProduct[]): Observable<boolean> {
+    this.selectedProducts$.next([]);
+
+    return of(true);
+  }
 }

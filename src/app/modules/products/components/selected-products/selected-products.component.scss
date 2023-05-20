@@ -1,11 +1,44 @@
+@mixin button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: darken($color: #3498db, $amount: 10%);
+  }
+
+  &.disabled {
+    background-color: #3498db;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}
+
 :host {
   width: 50%;
 }
 
 .selectedProducts {
   &-container {
+    position: relative;
     height: 100%;
     padding: 0 2px;
+  }
+
+  &-purchase {
+    @include button;
+
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   &-title {
@@ -46,25 +79,7 @@
       }
 
       & .action-button {
-        background-color: #3498db;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        border-radius: 4px;
-
-        &:hover {
-          background-color: darken($color: #3498db, $amount: 10%);
-        }
-
-        &.disabled {
-          background-color: #3498db;
-        }
+        @include button;
       }
     }
   }

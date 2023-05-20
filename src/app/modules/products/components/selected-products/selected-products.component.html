@@ -1,7 +1,15 @@
 <div class="selectedProducts-container">
   <p class="selectedProducts-title">Selected Products</p>
-
   <ng-container *ngIf="selectedProducts$ | async as selectedProducts">
+    <button
+      class="selectedProducts-purchase"
+      [disabled]="selectedProducts.length === 0"
+      [ngClass]="{ 'disabled': selectedProducts.length === 0 }"
+      (click)="onPurchaseProducts(selectedProducts)"
+    >
+      Purchase
+    </button>
+
     <ng-container *ngIf="selectedProducts.length !== 0; else noData">
       <div class="selectedProducts-list-header">
         <div class="name">Name</div>

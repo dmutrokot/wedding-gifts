@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models';
@@ -10,11 +10,9 @@ import { Product } from '../../models';
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.scss'],
 })
-export class AllProductsComponent implements OnInit, OnDestroy {
+export class AllProductsComponent implements OnInit {
   public allProducts$: BehaviorSubject<Product[]>;
   public areProductsLoading: boolean = false;
-
-  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private productsService: ProductsService) {}
 
@@ -30,10 +28,5 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   public onAddProductToSelectedList(product: Product): void {
     this.productsService.addProductToList(product);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
