@@ -10,9 +10,16 @@ import { ProductsComponent } from './containers/products/products.component';
 import { AllProductsComponent } from './components/all-products/all-products.component';
 import { SelectedProductsComponent } from './components/selected-products/selected-products.component';
 import { PurchasedProductsComponent } from './components/purchased-products/purchased-products.component';
+import { UnpurchasedProductsComponent } from './components/unpurchased-products/unpurchased-products.component';
 
 @NgModule({
-  declarations: [ProductsComponent, AllProductsComponent, SelectedProductsComponent, PurchasedProductsComponent],
+  declarations: [
+    ProductsComponent,
+    AllProductsComponent,
+    SelectedProductsComponent,
+    PurchasedProductsComponent,
+    UnpurchasedProductsComponent,
+  ],
   imports: [CommonModule, ProductsRoutingModule],
   providers: [ProductsService],
 })
