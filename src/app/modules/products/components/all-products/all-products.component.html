@@ -34,6 +34,11 @@
             </div>
           </li>
         </ul>
+        <app-pagination
+          [totalItems]="(allProductsCount$ | async)!"
+          [itemsPerPage]="itemsPerPage"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
       </ng-container>
     </ng-container>
   </ng-container>

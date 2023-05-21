@@ -1,1 +1,5 @@
-<div>pagination-component works!</div>
+<div class="pagination">
+  <button [disabled]="currentPage == 1" (click)="prevPage()">Prev</button>
+  <span>{{ currentPage }} / {{ totalPages }}</span>
+  <button [disabled]="currentPage == totalPages" (click)="nextPage()">Next</button>
+</div>

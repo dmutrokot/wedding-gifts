@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { PaginationModule } from '@share/modules/pagination/pagination.module';
+
 import { ProductsRoutingModule } from './products-routing.module';
 
 import { ProductsService } from './services/products.service';
@@ -23,7 +25,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     UnpurchasedProductsComponent,
     ProductDetailsComponent,
   ],
-  imports: [CommonModule, FormsModule, ProductsRoutingModule],
+  imports: [CommonModule, FormsModule, ProductsRoutingModule, PaginationModule],
   providers: [ProductsService],
 })
 export class ProductsModule {}

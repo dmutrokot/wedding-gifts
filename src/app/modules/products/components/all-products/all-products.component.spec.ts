@@ -26,8 +26,8 @@ describe('AllProductsComponent', () => {
   });
 
   describe('#ngOnInit', () => {
-    it('should call #productsService.getProducts', fakeAsync(() => {
-      const getProductsSpy = spyOn(productsService, 'getProducts').and.callThrough();
+    it('should call #productsService.getAllProducts', fakeAsync(() => {
+      const getProductsSpy = spyOn(productsService, 'getAllProducts').and.callThrough();
 
       component.ngOnInit();
       tick(1000);

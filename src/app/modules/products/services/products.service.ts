@@ -8,13 +8,21 @@ import * as products from '../../../../data/products.json';
 
 @Injectable()
 export class ProductsService {
-  public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(Array.from(products));
+  public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   public selectedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
   public purchasedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
   public unpurchasedProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(Array.from(products));
 
-  public getProducts(): void {
-    this.allProducts$.next(Array.from(products));
+  private allProducts: Product[] = Array.from(products);
+
+  public allProductsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(this.allProducts.length);
+
+  public getAllProducts(page: number = 1, itemsPerPage: number = 10): void {
+    const start: number = (page - 1) * itemsPerPage;
+    const end: number = start + itemsPerPage;
+    const pagedProducts: Product[] = this.allProducts.slice(start, end);
+
+    this.allProducts$.next(pagedProducts);
   }
 
   public getProductById(id: number): Observable<Product> {
