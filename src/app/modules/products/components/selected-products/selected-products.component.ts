@@ -27,6 +27,10 @@ export class SelectedProductsComponent extends Unsubscriber implements OnInit {
     this.productsService.removeProductFromList(id);
   }
 
+  public onRemoveWholeProductFromList(id: number, quantity: number): void {
+    this.productsService.removeProductFromList(id, quantity);
+  }
+
   public onPurchaseProducts(products: SelectedProduct[]): void {
     this.productsService
       .purchaseProducts(products)

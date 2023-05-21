@@ -78,19 +78,19 @@ export class ProductsService {
     }
   }
 
-  public removeProductFromList(id: number): void {
+  public removeProductFromList(id: number, quantity: number = 1): void {
     const currentAllProducts: Product[] = this.allProducts$.value;
     const currentProductIndex: number = currentAllProducts.findIndex((currentProduct) => currentProduct.id === id);
-    currentAllProducts[currentProductIndex].in_stock_quantity += 1;
+    currentAllProducts[currentProductIndex].in_stock_quantity += quantity;
     this.allProducts$.next(currentAllProducts);
 
     const currentSelectedProducts: SelectedProduct[] = this.selectedProducts$.value;
     const alreadyAddedProductIndex: number = currentSelectedProducts.findIndex((currentProduct) => currentProduct.id === id);
 
-    if (currentSelectedProducts[alreadyAddedProductIndex].quantity === 1) {
+    if (currentSelectedProducts[alreadyAddedProductIndex].quantity === quantity) {
       currentSelectedProducts.splice(alreadyAddedProductIndex, 1);
     } else {
-      currentSelectedProducts[alreadyAddedProductIndex].quantity -= 1;
+      currentSelectedProducts[alreadyAddedProductIndex].quantity -= quantity;
     }
 
     this.selectedProducts$.next(currentSelectedProducts);

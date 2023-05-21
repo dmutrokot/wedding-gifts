@@ -16,7 +16,7 @@
         <div class="brand">Brand</div>
         <div class="price">Price</div>
         <div class="quantity">Quantity</div>
-        <div></div>
+        <div class="actions"></div>
       </div>
 
       <ul class="selectedProducts-list">
@@ -25,15 +25,21 @@
           class="selectedProducts-list-item"
         >
           <div class="name" title="{{ product.name }}">{{ product.name }}</div>
-          <div class="brand">{{ product.brand }}</div>
+          <div class="brand" title="{{ product.brand }}">{{ product.brand }}</div>
           <div class="price">{{ product.price }}</div>
           <div class="quantity">{{ product.quantity }}</div>
-          <div>
+          <div class="actions">
             <button
               class="action-button"
               (click)="onRemoveProductFromList(product.id)"
             >
-              Remove
+              Remove(1)
+            </button>
+            <button
+              class="action-button completeRemoval"
+              (click)="onRemoveWholeProductFromList(product.id, product.quantity)"
+            >
+              X
             </button>
           </div>
         </li>
