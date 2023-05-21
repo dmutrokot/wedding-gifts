@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { of } from 'rxjs';
 
+import { NoEntityModule } from '@share/modules/no-entity/no-entity.module';
 import { ProductsService } from '../../services/products.service';
 import { AllProductsComponent } from '../../components/all-products/all-products.component';
 import { PurchasedProductsComponent } from '../../components/purchased-products/purchased-products.component';
@@ -21,7 +22,7 @@ describe('ProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, NoEntityModule],
       declarations: [
         ProductsComponent,
         AllProductsComponent,

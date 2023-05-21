@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { NoEntityModule } from '@share/modules/no-entity/no-entity.module';
 import { PaginationModule } from '@share/modules/pagination/pagination.module';
 
 import { ProductsRoutingModule } from './products-routing.module';
@@ -25,7 +26,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     UnpurchasedProductsComponent,
     ProductDetailsComponent,
   ],
-  imports: [CommonModule, FormsModule, ProductsRoutingModule, PaginationModule],
+  imports: [CommonModule, FormsModule, ProductsRoutingModule, PaginationModule, NoEntityModule],
   providers: [ProductsService],
 })
 export class ProductsModule {}
