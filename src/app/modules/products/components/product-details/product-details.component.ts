@@ -24,6 +24,8 @@ export class ProductDetailsComponent {
   }
 
   public onAddToCart(product: Product, selectedQuantity: number): void {
-    this.productsService.addProductToList({ ...product }, selectedQuantity);
+    if (selectedQuantity <= product.in_stock_quantity && selectedQuantity > 0) {
+      this.productsService.addProductToList({ ...product }, selectedQuantity);
+    }
   }
 }

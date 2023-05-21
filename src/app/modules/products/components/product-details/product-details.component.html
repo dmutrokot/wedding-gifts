@@ -11,7 +11,13 @@
     <p class="productDetails-quantity">In stock: {{ product.in_stock_quantity }}</p>
     <div class="productDetails-actions">
       <input type="number" class="productDetails-quantity-input" [(ngModel)]="selectedQuantity" />
-      <button class="productDetails-add-button" (click)="onAddToCart(product, selectedQuantity)">Add to list</button>
+      <button
+        class="productDetails-add-button"
+        [ngClass]="{ 'disabled': selectedQuantity > product.in_stock_quantity || selectedQuantity <= 0 }"
+        (click)="onAddToCart(product, selectedQuantity)"
+      >
+        Add to list
+      </button>
     </div>
   </div>
 </div>
