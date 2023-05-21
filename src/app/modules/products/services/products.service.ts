@@ -10,6 +10,8 @@ import * as products from '../../../../data/products.json';
 export class ProductsService {
   public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   public selectedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
+  public purchasedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
+  public unpurchasedProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
   public getProducts(): void {
     this.allProducts$.next(Array.from(products));
@@ -61,8 +63,38 @@ export class ProductsService {
   }
 
   public purchaseProducts(products: SelectedProduct[]): Observable<boolean> {
+    this.updatePurchasedProducts(products);
+
+    this.updateUnpurchasedProducts();
+
     this.selectedProducts$.next([]);
 
     return of(true);
+  }
+
+  private updatePurchasedProducts(products: SelectedProduct[]): void {
+    const currentPurchasedProducts: SelectedProduct[] = this.purchasedProducts$.value;
+    const newPurchasedProducts: SelectedProduct[] = [...currentPurchasedProducts, ...products];
+
+    const aggregatedProducts: SelectedProduct[] = newPurchasedProducts.reduce((acc, product) => {
+      const existingProduct: SelectedProduct | undefined = acc.find((p) => p.id === product.id);
+
+      if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+      } else {
+        acc.push({ ...product });
+      }
+
+      return acc;
+    }, [] as SelectedProduct[]);
+
+    this.purchasedProducts$.next(aggregatedProducts);
+  }
+
+  private updateUnpurchasedProducts(): void {
+    const purchasedProductIds: number[] = this.purchasedProducts$.value.map((p) => p.id);
+    const unpurchasedProducts: Product[] = this.allProducts$.value.filter((product) => !purchasedProductIds.includes(product.id));
+
+    this.unpurchasedProducts$.next(unpurchasedProducts);
   }
 }
