@@ -9,7 +9,7 @@
           <div class="brand">Brand</div>
           <div class="price">Price</div>
           <div class="quantity">In Stock</div>
-          <div></div>
+          <div class="actions"></div>
         </div>
 
         <ul class="allProducts-list">
@@ -18,17 +18,17 @@
             class="allProducts-list-item"
           >
             <div class="name" title="{{ product.name }}">{{ product.name }}</div>
-            <div class="brand">{{ product.brand }}</div>
+            <div class="brand" title="{{ product.brand }}">{{ product.brand }}</div>
             <div class="price">{{ product.price }}</div>
             <div class="quantity">{{ product.in_stock_quantity }}</div>
-            <div>
+            <div class="actions">
               <button
                 class="action-button"
                 [disabled]="product.in_stock_quantity === 0"
                 [ngClass]="{ 'disabled': product.in_stock_quantity === 0 }"
                 (click)="onAddProductToSelectedList(product)"
               >
-                Add
+                Add(1)
               </button>
               <a class="action-button details" [routerLink]="'/products' + '/' + product.id">Details</a>
             </div>

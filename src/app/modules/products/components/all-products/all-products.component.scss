@@ -31,6 +31,10 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+
+      .actions {
+        flex: 1.2;
+      }
     }
 
     &-header {
