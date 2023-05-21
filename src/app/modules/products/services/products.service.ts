@@ -15,9 +15,11 @@ export class ProductsService {
 
   private allProducts: Product[] = Array.from(products);
   private purchasedProducts: SelectedProduct[] = [];
+  private unpurchasedProducts: Product[] = Array.from(products);
 
   public allProductsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(this.allProducts.length);
   public purchasedProductsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public unpurchasedProductsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(this.unpurchasedProducts.length);
 
   public getAllProducts(page: number = 1, itemsPerPage: number = 10): void {
     const start: number = (page - 1) * itemsPerPage;
@@ -33,6 +35,14 @@ export class ProductsService {
     const pagedProducts: SelectedProduct[] = this.purchasedProducts.slice(start, end);
 
     this.purchasedProducts$.next(pagedProducts);
+  }
+
+  public getUnpurchasedProducts(page: number = 1, itemsPerPage: number = 10): void {
+    const start: number = (page - 1) * itemsPerPage;
+    const end: number = start + itemsPerPage;
+    const pagedProducts: Product[] = this.unpurchasedProducts.slice(start, end);
+
+    this.unpurchasedProducts$.next(pagedProducts);
   }
 
   public getProductById(id: number): Observable<Product> {
@@ -118,9 +128,11 @@ export class ProductsService {
   }
 
   private updateUnpurchasedProducts(): void {
-    const purchasedProductIds: number[] = this.purchasedProducts$.value.map((p) => p.id);
-    const unpurchasedProducts: Product[] = this.allProducts$.value.filter((product) => !purchasedProductIds.includes(product.id));
+    const purchasedProductIds: number[] = this.purchasedProducts.map((p) => p.id);
+    const unpurchasedProducts: Product[] = this.allProducts.filter((product) => !purchasedProductIds.includes(product.id));
 
+    this.unpurchasedProducts = unpurchasedProducts;
+    this.unpurchasedProductsCount$.next(unpurchasedProducts.length);
     this.unpurchasedProducts$.next(unpurchasedProducts);
   }
 }
