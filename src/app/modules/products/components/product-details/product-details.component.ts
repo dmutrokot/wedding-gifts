@@ -11,6 +11,7 @@ import { Product } from '../../models';
 })
 export class ProductDetailsComponent {
   public product: Product;
+  public selectedQuantity: number = 1;
 
   constructor(private route: ActivatedRoute, private productsService: ProductsService) {}
 
@@ -20,5 +21,9 @@ export class ProductDetailsComponent {
     this.productsService.getProductById(id).subscribe((product) => {
       this.product = product;
     });
+  }
+
+  public onAddToCart(product: Product, selectedQuantity: number): void {
+    this.productsService.addProductToList({ ...product }, selectedQuantity);
   }
 }

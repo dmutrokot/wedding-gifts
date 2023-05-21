@@ -47,4 +47,28 @@
     font-size: 16px;
     color: #333;
   }
+
+  &-actions {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  &-quantity-input {
+    width: 50px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  &-add-button {
+    padding: 6px 12px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
 }

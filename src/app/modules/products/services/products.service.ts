@@ -8,7 +8,7 @@ import * as products from '../../../../data/products.json';
 
 @Injectable()
 export class ProductsService {
-  public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(Array.from(products));
   public selectedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
   public purchasedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
   public unpurchasedProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(Array.from(products));
@@ -23,12 +23,12 @@ export class ProductsService {
     return of(product).pipe(delay(1000));
   }
 
-  public addProductToList(product: Product): void {
+  public addProductToList(product: Product, quantity: number = 1): void {
     const currentAllProducts: Product[] = this.allProducts$.value;
     const currentProductIndex: number = currentAllProducts.findIndex((currentProduct) => currentProduct.id === product.id);
 
     if (currentAllProducts[currentProductIndex].in_stock_quantity > 0) {
-      currentAllProducts[currentProductIndex].in_stock_quantity -= 1;
+      currentAllProducts[currentProductIndex].in_stock_quantity -= quantity;
       this.allProducts$.next(currentAllProducts);
 
       const currentSelectedProducts: SelectedProduct[] = this.selectedProducts$.value;
@@ -40,10 +40,10 @@ export class ProductsService {
           id: product.id,
           name: product.name,
           price: product.price,
-          quantity: 1,
+          quantity: quantity,
         });
       } else {
-        currentSelectedProducts[alreadyAddedProductIndex].quantity += 1;
+        currentSelectedProducts[alreadyAddedProductIndex].quantity += quantity;
       }
 
       this.selectedProducts$.next(currentSelectedProducts);
