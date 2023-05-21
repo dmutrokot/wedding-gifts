@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { takeUntil } from 'rxjs';
+
+import { Unsubscriber } from '@core/classes/unsubscriber';
+
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models';
 
@@ -9,22 +13,27 @@ import { Product } from '../../models';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent extends Unsubscriber {
   public product: Product;
   public selectedQuantity: number = 1;
   public isProductLoading: boolean;
 
-  constructor(private route: ActivatedRoute, private productsService: ProductsService) {}
+  constructor(private route: ActivatedRoute, private productsService: ProductsService) {
+    super();
+  }
 
   ngOnInit(): void {
     const id: number = +this.route.snapshot.paramMap.get('id')!;
 
     this.isProductLoading = true;
 
-    this.productsService.getProductById(id).subscribe((product) => {
-      this.product = product;
-      this.isProductLoading = false;
-    });
+    this.productsService
+      .getProductById(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((product) => {
+        this.product = product;
+        this.isProductLoading = false;
+      });
   }
 
   public onAddToCart(product: Product, selectedQuantity: number): void {
