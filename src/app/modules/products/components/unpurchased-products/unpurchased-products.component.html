@@ -1,1 +1,33 @@
-<div>app-unpurchased-products works!</div>
+<div class="unpurchasedProducts-container">
+  <p class="unpurchasedProducts-title">Unpurchased Products</p>
+
+  <ng-container *ngIf="unpurchasedProducts$ | async as unpurchasedProducts">
+    <ng-container *ngIf="unpurchasedProducts.length !== 0; else noData">
+      <div class="unpurchasedProducts-list-header">
+        <div>Name</div>
+        <div>Brand</div>
+        <div>Price</div>
+        <div>In Stock</div>
+      </div>
+
+      <ul class="unpurchasedProducts-list">
+        <li
+          *ngFor="let product of unpurchasedProducts"
+          class="unpurchasedProducts-list-item"
+          [ngClass]="{ 'outOfStoke': product.in_stock_quantity === 0 }"
+        >
+          <div title="{{ product.name }}">{{ product.name }}</div>
+          <div>{{ product.brand }}</div>
+          <div>{{ product.price }}</div>
+          <div>{{ product.in_stock_quantity }}</div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noData>
+  <div class="noData-container">
+    There are no products
+  </div>
+</ng-template>

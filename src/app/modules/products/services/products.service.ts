@@ -11,7 +11,7 @@ export class ProductsService {
   public allProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   public selectedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
   public purchasedProducts$: BehaviorSubject<SelectedProduct[]> = new BehaviorSubject<SelectedProduct[]>([]);
-  public unpurchasedProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  public unpurchasedProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(Array.from(products));
 
   public getProducts(): void {
     this.allProducts$.next(Array.from(products));

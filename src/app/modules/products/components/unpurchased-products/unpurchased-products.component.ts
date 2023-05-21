@@ -15,7 +15,5 @@ export class UnpurchasedProductsComponent {
 
   ngOnInit(): void {
     this.unpurchasedProducts$ = this.productsService.unpurchasedProducts$;
-
-    this.unpurchasedProducts$.subscribe((val) => console.log('unpurchased', val));
   }
 }
