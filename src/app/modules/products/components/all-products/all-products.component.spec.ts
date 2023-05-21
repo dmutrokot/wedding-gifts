@@ -26,13 +26,17 @@ describe('AllProductsComponent', () => {
   });
 
   describe('#ngOnInit', () => {
-    it('should call #productsService.getAllProducts', fakeAsync(() => {
+    it('should call #productsService.getAllProducts and manage loading state', fakeAsync(() => {
       const getProductsSpy = spyOn(productsService, 'getAllProducts').and.callThrough();
 
       component.ngOnInit();
+
+      expect(component.areProductsLoading).toBeTruthy();
+
       tick(1000);
 
       expect(getProductsSpy).toHaveBeenCalled();
+      expect(component.areProductsLoading).toBeFalsy();
     }));
   });
 
@@ -46,9 +50,21 @@ describe('AllProductsComponent', () => {
         in_stock_quantity: 50,
       };
       const addProductToListSpy = spyOn(productsService, 'addProductToList').and.callFake(() => {});
+
       component.onAddProductToSelectedList(product);
 
       expect(addProductToListSpy).toHaveBeenCalledWith(product);
+    });
+  });
+
+  describe('#onPageChange', () => {
+    it('should call service method with correct page', () => {
+      const page = 2;
+      const getAllProductsSpy = spyOn(productsService, 'getAllProducts').and.callFake(() => {});
+
+      component.onPageChange(page);
+
+      expect(getAllProductsSpy).toHaveBeenCalledWith(page, component.itemsPerPage);
     });
   });
 });
