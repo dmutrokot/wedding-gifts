@@ -41,10 +41,6 @@
     &-item {
       border-bottom: 1px solid #eee;
 
-      &.outOfStoke {
-        opacity: 0.2;
-      }
-
       & .action-button {
         background-color: #3498db;
         color: white;
@@ -63,7 +59,8 @@
         }
 
         &.disabled {
-          background-color: #3498db;
+          opacity: 0.2;
+          pointer-events: none;
         }
 
         &.details {

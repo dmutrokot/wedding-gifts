@@ -16,7 +16,6 @@
           <li
             *ngFor="let product of allProducts"
             class="allProducts-list-item"
-            [ngClass]="{ 'outOfStoke': product.in_stock_quantity === 0 }"
           >
             <div class="name" title="{{ product.name }}">{{ product.name }}</div>
             <div class="brand">{{ product.brand }}</div>
