@@ -1,1 +1,13 @@
-<div>app-product-details works!</div>
+<a routerLink="/products" class="back-link">Back to products</a>
+
+<div class="productDetails-container" *ngIf="product">
+  <div class="productDetails-image">
+    <img src="https://via.placeholder.com/200" alt="{{product.name}}" />
+  </div>
+  <div class="productDetails-info">
+    <h1 class="productDetails-name">{{ product.name }}</h1>
+    <h2 class="productDetails-brand">{{ product.brand }}</h2>
+    <p class="productDetails-price">{{ product.price }}</p>
+    <p class="productDetails-quantity">In stock: {{ product.in_stock_quantity }}</p>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, delay, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, delay, of } from 'rxjs';
 
 import { Product, SelectedProduct } from '../models';
 
@@ -15,6 +15,12 @@ export class ProductsService {
 
   public getProducts(): void {
     this.allProducts$.next(Array.from(products));
+  }
+
+  public getProductById(id: number): Observable<Product> {
+    const product: Product | undefined = Array.from(products).find((product) => product.id === id)!;
+
+    return of(product).pipe(delay(1000));
   }
 
   public addProductToList(product: Product): void {

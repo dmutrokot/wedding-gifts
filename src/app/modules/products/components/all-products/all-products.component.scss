@@ -65,6 +65,10 @@
         &.disabled {
           background-color: #3498db;
         }
+
+        &.details {
+          margin-left: 4px;
+        }
       }
     }
   }
