@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
-import { Unsubscriber } from 'src/app/common/core/classes/unsubscriber';
+import { Unsubscriber } from '@core/classes/unsubscriber';
 
 import { ProductsService } from '../../services/products.service';
 import { SelectedProduct } from '../../models';
