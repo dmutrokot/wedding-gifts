@@ -1,0 +1,53 @@
+:host {
+  width: 50%;
+}
+
+.purchasedProducts {
+  &-container {
+    height: 100%;
+    padding: 0 2px;
+  }
+
+  &-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &-list {
+    padding: 0;
+
+    &-header,
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+
+      & > div {
+        flex: 1;
+        align-self: center;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    &-header {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+
+    &-item {
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+
+.noData-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 40px);
+}

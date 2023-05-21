@@ -1,1 +1,32 @@
-<div>app-purchased-products works!</div>
+<div class="purchasedProducts-container">
+  <p class="purchasedProducts-title">Purchased Products</p>
+
+  <ng-container *ngIf="purchasedProducts$ | async as purchasedProducts">
+    <ng-container *ngIf="purchasedProducts.length !== 0; else noData">
+      <div class="purchasedProducts-list-header">
+        <div>Name</div>
+        <div>Brand</div>
+        <div>Price</div>
+        <div>Quantity</div>
+      </div>
+
+      <ul class="purchasedProducts-list">
+        <li
+          *ngFor="let product of purchasedProducts"
+          class="purchasedProducts-list-item"
+        >
+          <div title="{{ product.name }}">{{ product.name }}</div>
+          <div>{{ product.brand }}</div>
+          <div>{{ product.price }}</div>
+          <div>{{ product.quantity }}</div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noData>
+  <div class="noData-container">
+    There are no products
+  </div>
+</ng-template>

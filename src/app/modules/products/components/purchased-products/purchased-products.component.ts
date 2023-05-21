@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
+
 import { BehaviorSubject } from 'rxjs';
+
+import { ProductsService } from '../../services/products.service';
 import { SelectedProduct } from '../../models';
 
 @Component({
@@ -15,7 +17,5 @@ export class PurchasedProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.purchasedProducts$ = this.productsService.purchasedProducts$;
-
-    this.purchasedProducts$.subscribe((val) => console.log('purchased', val));
   }
 }
