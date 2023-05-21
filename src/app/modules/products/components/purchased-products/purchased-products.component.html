@@ -21,6 +21,13 @@
           <div>{{ product.quantity }}</div>
         </li>
       </ul>
+
+      <app-pagination
+        [totalItems]="(purchasedProductsCount$ | async)!"
+        [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+
     </ng-container>
   </ng-container>
 </div>

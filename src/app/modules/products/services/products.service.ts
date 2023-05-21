@@ -14,8 +14,10 @@ export class ProductsService {
   public unpurchasedProducts$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(Array.from(products));
 
   private allProducts: Product[] = Array.from(products);
+  private purchasedProducts: SelectedProduct[] = [];
 
   public allProductsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(this.allProducts.length);
+  public purchasedProductsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   public getAllProducts(page: number = 1, itemsPerPage: number = 10): void {
     const start: number = (page - 1) * itemsPerPage;
@@ -23,6 +25,14 @@ export class ProductsService {
     const pagedProducts: Product[] = this.allProducts.slice(start, end);
 
     this.allProducts$.next(pagedProducts);
+  }
+
+  public getPurchasedProducts(page: number = 1, itemsPerPage: number = 10): void {
+    const start: number = (page - 1) * itemsPerPage;
+    const end: number = start + itemsPerPage;
+    const pagedProducts: SelectedProduct[] = this.purchasedProducts.slice(start, end);
+
+    this.purchasedProducts$.next(pagedProducts);
   }
 
   public getProductById(id: number): Observable<Product> {
@@ -87,7 +97,7 @@ export class ProductsService {
   }
 
   private updatePurchasedProducts(products: SelectedProduct[]): void {
-    const currentPurchasedProducts: SelectedProduct[] = this.purchasedProducts$.value;
+    const currentPurchasedProducts: SelectedProduct[] = this.purchasedProducts;
     const newPurchasedProducts: SelectedProduct[] = [...currentPurchasedProducts, ...products];
 
     const aggregatedProducts: SelectedProduct[] = newPurchasedProducts.reduce((acc, product) => {
@@ -102,6 +112,8 @@ export class ProductsService {
       return acc;
     }, [] as SelectedProduct[]);
 
+    this.purchasedProducts = aggregatedProducts;
+    this.purchasedProductsCount$.next(aggregatedProducts.length);
     this.purchasedProducts$.next(aggregatedProducts);
   }
 
